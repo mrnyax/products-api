@@ -105,6 +105,9 @@
         </executions>
         <configuration>
           <redeploy>true</redeploy>
+          <jvmArgs>
+            <jvmArg>-Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory</jvmArg>
+          </jvmArgs>
         </configuration>
       </plugin>
 

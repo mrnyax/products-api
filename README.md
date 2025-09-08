@@ -6,19 +6,24 @@ This application was generated using [start.vertx.io](http://start.vertx.io).
 
 ## Building
 
-To launch your tests:
+To run tests:
 ```bash
   ./mvnw clean test
 ```
 
-To package your application:
+To package application:
 ```bash
   ./mvnw clean package
 ```
 
-To run your application:
+To run application:
 ```bash
   ./mvnw clean compile exec:java
+```
+
+To run, redeploy and test without repackaging:
+```bash
+  ./mvnw clean vertx:run
 ```
 
 ## Need help?

@@ -1,0 +1,17 @@
+<configuration>
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS}  %-5p level [%25.15t] %-25logger{18} : %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <!-- app logs -->
+  <logger name="com.mrnyax.products" level="INFO"/>
+
+  <!-- lower Vert.x noise if needed -->
+  <logger name="io.vertx" level="INFO"/>
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT"/>
+  </root>
+</configuration>

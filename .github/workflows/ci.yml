@@ -36,7 +36,7 @@ jobs:
 
       - name: Upload test reports (JUnit/Surefire)
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v4
         with:
           name: surefire-reports-${{ matrix.java }}
           path: |

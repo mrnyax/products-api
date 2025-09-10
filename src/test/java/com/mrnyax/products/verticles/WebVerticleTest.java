@@ -1,6 +1,8 @@
 package com.mrnyax.products.verticles;
 
 import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.junit5.VertxExtension;
 import io.vertx.junit5.VertxTestContext;
@@ -28,7 +30,12 @@ class WebVerticleTest {
       .send()
       .onComplete(testContext.succeeding(response -> testContext.verify(() -> {
         assertEquals(200, response.statusCode());
-        assertNotNull(response.body());
+        assertNotNull(response.bodyAsJsonArray());
+        JsonArray responseBody = response.bodyAsJsonArray();
+        assertFalse(responseBody.isEmpty());
+        JsonObject product = responseBody.getJsonObject(0);
+        assertTrue(product.containsKey("id"));
+        assertTrue(product.containsKey("name"));
         testContext.completeNow();
       })));
   }
@@ -41,7 +48,10 @@ class WebVerticleTest {
       .send()
       .onComplete(testContext.succeeding(response -> testContext.verify(() -> {
         assertEquals(200, response.statusCode());
-        assertNotNull(response.body());
+        assertNotNull(response.bodyAsJsonObject());
+        JsonObject product = response.bodyAsJsonObject();
+        assertTrue(product.containsKey("id"));
+        assertTrue(product.containsKey("name"));
         testContext.completeNow();
       })));
   }
@@ -54,6 +64,9 @@ class WebVerticleTest {
       .onComplete(testContext.succeeding(response -> testContext.verify(() -> {
         assertEquals(201, response.statusCode());
         assertNotNull(response.body());
+        JsonObject jsonResponseBody = response.bodyAsJsonObject();
+        assertTrue(jsonResponseBody.containsKey("id"));
+        assertTrue(jsonResponseBody.containsKey("name"));
         testContext.completeNow();
       })));
   }
@@ -67,6 +80,9 @@ class WebVerticleTest {
       .onComplete(testContext.succeeding(response -> testContext.verify(() -> {
         assertEquals(200, response.statusCode());
         assertNotNull(response.body());
+        JsonObject jsonResponseBody = response.bodyAsJsonObject();
+        assertTrue(jsonResponseBody.containsKey("id"));
+        assertTrue(jsonResponseBody.containsKey("name"));
         testContext.completeNow();
       })));
   }

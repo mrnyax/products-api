@@ -123,6 +123,42 @@
       </plugin>
 
       <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>3.4.6</version>
+        <configuration>
+          <from>
+            <image>eclipse-temurin:17-jre-ubi9-minimal</image>
+          </from>
+          <to>
+            <image>library/products-api</image>
+            <tags>
+              <tag>latest</tag>
+            </tags>
+          </to>
+          <container>
+            <mainClass>${launcher.class}</mainClass>
+            <args>
+              <arg>${vertx.verticle}</arg>
+            </args>
+            <jvmFlags>
+              <jvmFlag>
+                -Dvertx.logger-delegate-factory-class-name=io.vertx.core.logging.SLF4JLogDelegateFactory
+              </jvmFlag>
+            </jvmFlags>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>build</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${maven-surefire-plugin.version}</version>
       </plugin>

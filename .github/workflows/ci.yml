@@ -9,7 +9,7 @@ on:
 jobs:
   build-and-test:
     name: build and test products-api
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout repo
       - name: Checkout code

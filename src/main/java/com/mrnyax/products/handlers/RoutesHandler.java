@@ -13,7 +13,8 @@ public final class RoutesHandler {
 
   public static void add(RoutingContext routingContext) {
     final JsonObject responseBody = new JsonObject();
-    responseBody.put("status", "created");
+    responseBody.put("id", UUID.randomUUID().toString());
+    responseBody.put("name", "Product name");
     toJsonResponse(routingContext, 201, responseBody);
   }
 

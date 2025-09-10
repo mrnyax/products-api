@@ -19,8 +19,8 @@ jobs:
       - name: Setup jdk 17
         uses: actions/setup-java@v5
         with:
-          distribution: eclipse-temurin
-          java-version: 17-jdk-ubi9-minimal
+          distribution: temurin
+          java-version: 17
 
       - name: Run tests
         run: ./mvnw clean test

@@ -26,6 +26,12 @@ To run, redeploy and test without repackaging:
   ./mvnw clean vertx:run
 ```
 
+The supply external configurations when running the app. This will override
+other configurations already supplied
+```bash
+  ./mvnw clean compile vertx:run -Dvertx.config=ext-config.json
+```
+
 ## Need help?
 
 * https://vertx.io/docs/[Vert.x Documentation]

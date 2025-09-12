@@ -4,10 +4,15 @@ import com.mrnyax.products.handlers.RoutesHandler;
 import io.vertx.core.Future;
 import io.vertx.core.VerticleBase;
 import io.vertx.core.http.HttpServer;
+import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.handler.BodyHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WebVerticle extends VerticleBase {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(WebVerticle.class);
 
   @Override
   public Future<?> start() {
@@ -32,8 +37,8 @@ public class WebVerticle extends VerticleBase {
     int port = getServerPort();
     return server
       .listen(port)
-      .onSuccess(r -> {})
-      .onFailure(err -> {});
+      .onSuccess(r -> LOGGER.info("HTTP server started on port {}", port))
+      .onFailure(err -> LOGGER.error("HTTP server failed on port {}", port, err));
   }
 
   private static int getServerPort() {

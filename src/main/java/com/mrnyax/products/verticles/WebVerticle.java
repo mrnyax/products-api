@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 public class WebVerticle extends VerticleBase {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(WebVerticle.class);
+  private static final int DEFAULT_PORT = 8080;
 
   @Override
   public Future<?> start() {
@@ -41,7 +42,12 @@ public class WebVerticle extends VerticleBase {
       .onFailure(err -> LOGGER.error("HTTP server failed on port {}", port, err));
   }
 
-  private static int getServerPort() {
-    return 8000;
+  private int getServerPort() {
+    final JsonObject serverConfig = config().getJsonObject("server");
+    if (serverConfig == null) {
+      LOGGER.error("No server config found.");
+      return DEFAULT_PORT;
+    }
+    return serverConfig.getInteger("port", DEFAULT_PORT);
   }
 }

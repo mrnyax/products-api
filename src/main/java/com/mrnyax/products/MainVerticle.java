@@ -44,9 +44,7 @@ public class MainVerticle extends VerticleBase {
       configOpts.addStore(initConfigFileWatcher());
     }
 
-    if (System.getenv().containsKey("KUBERNETES_NAMESPACE")) {
-      configOpts.addStore(initKubernetesWatcher());
-    }
+    configOpts.addStore(initKubernetesWatcher());
 
     ConfigRetriever configRetriever = ConfigRetriever
       .create(vertx, configOpts);
@@ -64,12 +62,14 @@ public class MainVerticle extends VerticleBase {
 
   private ConfigStoreOptions initKubernetesWatcher() {
     LOG.info("Initializing Kubernetes config watcher");
-    final String namespace = System.getenv().getOrDefault("KUBERNETES_NAMESPACE", "default");
+
     final JsonObject config = new JsonObject()
-      .put("namespace", namespace)
-      .put("name", "my-demo");
+      .put("namespace", "tunda-dev")
+      .put("name", "product-api-config");
+
     return new ConfigStoreOptions()
-      .setType("configMap")
+      .setType("configmap")
+      .setOptional(true)
       .setConfig(config);
   }
 

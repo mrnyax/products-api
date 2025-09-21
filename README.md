@@ -36,6 +36,12 @@ To build a local docker image with custom image name and tag:
   ./mvnw clean compile jib:dockerBuild -Dimage={image-name}:{image-tag}
 ```
 
+The supply external configurations when running the app. This will override
+other configurations already supplied
+```bash
+  ./mvnw clean compile vertx:run -Dvertx.config=ext-config.json
+```
+
 ## Need help?
 
 * [Vert.x Documentation](https://vertx.io/docs/)
